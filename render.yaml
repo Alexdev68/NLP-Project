@@ -2,8 +2,8 @@ services:
   - type: web
     name: llm-qa-grok
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT"
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
     envVars:
       XAI_API_KEY:
-        value: "YOUR_GROK_API_KEY_HERE"
+        value: YOUR_GROK_API_KEY_HERE
