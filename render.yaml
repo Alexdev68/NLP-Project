@@ -6,5 +6,4 @@ services:
     startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT"
     envVars:
       XAI_API_KEY:
-        fromService: false
-
+        value: "YOUR_GROK_API_KEY_HERE"
