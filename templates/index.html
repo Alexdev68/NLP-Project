@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Grok Q&A System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1>Grok Q&A System</h1>
+        <p class="muted">Ask any question. View preprocessing. View Grok’s answer.</p>
+    </header>
+
+    <form method="post" class="form">
+        <label>Question</label>
+        <textarea name="question" rows="3">{{ original or '' }}</textarea>
+
+        <label>Model</label>
+        <input name="model" value="{{ model or 'grok-2-latest' }}">
+
+        <button type="submit" class="btn">Ask Grok</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="messages">
+        {% for category, msg in messages %}
+          <li class="flash {{ category }}">{{ msg }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% if processed %}
+    <section class="results">
+
+        <h2>Processed Question</h2>
+        <pre>{{ processed }}</pre>
+
+        <h3>Tokens</h3>
+        <pre>{{ tokens }}</pre>
+
+        <h2>Grok Answer</h2>
+        <pre>{{ answer }}</pre>
+
+        <h3>Raw API JSON</h3>
+        <pre>{{ llm_raw | tojson(indent=2) }}</pre>
+
+    </section>
+    {% endif %}
+
+</div>
+</body>
+</html>
