@@ -1,3 +1,10 @@
-services: - type: web name: llm-qa-grok env: python buildCommand: "pip
-install -r requirements.txt" startCommand: "gunicorn app:app" envVars:
-XAI_API_KEY: fromService: false
+services:
+  - type: web
+    name: llm-qa-grok
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT"
+    envVars:
+      XAI_API_KEY:
+        fromService: false
+
